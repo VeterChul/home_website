@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="green"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="icon" href="https://vesatec.com/favicon.svg" type="image/svg+xml">
+
+<meta name="theme-color" content="#050505">
+
+<meta name="color-scheme" content="dark">
+
+<title>
+    VeterLand
+</title>
+
+<meta name="description" content="Cultura underground de internet desde los años 90. GNU/Linux, redes, BBS, IRC, software libre y código abierto.">
+
+<style>
+
+@import url(
+'https://fonts.cdnfonts.com/css/perfect-dos-vga-437'
+);
+
+:root{
+
+--bg:#050505;
+--fg:#b8b8b8;
+--v:#d0d0d0;
+
+}
+
+html[data-theme="green"]{
+
+--bg:#020a02;
+
+--fg:#7fdc7f;
+
+--v:#7fdc7f;
+
+}
+
+html[data-theme="amber"]{
+
+--bg:#090500;
+
+--fg:#e8b04d;
+
+--v:#e8b04d;
+
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html,
+body{
+
+width:100%;
+height:100%;
+
+overflow:hidden;
+
+position:fixed;
+
+inset:0;
+
+touch-action:manipulation;
+
+overscroll-behavior:none;
+
+}
+
+body{
+
+background:
+var(--bg);
+
+color:
+var(--fg);
+
+font-family:
+'Perfect DOS VGA 437',
+'Perfect DOS VGA 437 Win',
+monospace;
+
+}
+
+/* V */
+
+.watermark{
+
+position:absolute;
+
+top:50%;
+
+left:50%;
+
+translate:-50% -56%;
+
+pointer-events:none;
+
+opacity:.022;
+
+z-index:1;
+
+}
+
+.watermark svg{
+
+width:
+min(
+120vw,
+160vh
+);
+
+height:auto;
+
+fill:
+var(--v);
+
+}
+
+/* CRT */
+
+.crt{
+
+position:relative;
+
+width:100%;
+
+height:100dvh;
+
+transform:
+perspective(2200px)
+rotateX(.15deg);
+
+}
+
+.crt::before{
+
+content:"";
+
+position:fixed;
+
+inset:0;
+
+pointer-events:none;
+
+background:
+
+radial-gradient(
+
+ellipse at center,
+
+transparent 72%,
+
+rgba(0,0,0,.12)
+
+);
+
+z-index:99;
+
+}
+
+.crt::after{
+
+content:"";
+
+position:fixed;
+
+inset:0;
+
+pointer-events:none;
+
+background:
+
+repeating-linear-gradient(
+
+to bottom,
+
+rgba(0,0,0,.12),
+
+rgba(0,0,0,.12) 1px,
+
+transparent 1px,
+
+transparent 3px
+
+);
+
+z-index:100;
+
+}
+
+.screen{
+
+position:relative;
+
+z-index:20;
+
+width:100vw;
+
+height:100dvh;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+text-align:center;
+
+padding:2rem;
+
+transform:
+translateY(-2vh);
+
+overflow:hidden;
+
+}
+
+.logo{
+
+width:100%;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+overflow:visible;
+
+letter-spacing:0;
+
+font-size:
+
+clamp(
+7rem,
+24vw,
+18rem
+);
+
+line-height:.85;
+
+min-height:1em;
+
+}
+
+.tagline{
+
+margin-top:.35rem;
+
+font-size:
+
+clamp(
+2.2rem,
+6vw,
+5rem
+);
+
+}
+
+.tagline a{
+
+color:inherit;
+
+text-decoration:none;
+
+}
+
+.cursor{
+
+animation:
+blink .7s infinite;
+
+}
+
+@keyframes blink{
+
+0%,50%{
+
+opacity:1;
+
+}
+
+51%,100%{
+
+opacity:0;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.logo{
+
+font-size:
+
+clamp(
+5rem,
+22vw,
+9rem
+);
+
+}
+
+.tagline{
+
+font-size:
+
+clamp(
+1.8rem,
+8vw,
+3rem
+);
+
+}
+
+.watermark svg{
+
+width:
+180vw;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="watermark">
+
+<svg viewBox="0 0 100 100">
+
+<path d="
+M20 10
+L35 10
+L35 62
+L43 62
+L43 75
+L57 75
+L57 62
+L65 62
+L65 10
+L80 10
+L80 62
+L70 62
+L70 78
+L60 78
+L60 90
+L40 90
+L40 78
+L30 78
+L30 62
+L20 62
+Z"></path>
+
+</svg>
+
+</div>
+
+<div class="crt">
+
+<div class="screen">
+
+<div id="logo" class="logo">VESATEC</div>
+
+<div id="tagline" class="tagline"><a href="mailto:info@vesatec.com">REBELDES DIGITALES</a><span class="cursor">█</span></div>
+
+</div>
+
+</div>
+
+<script>
+
+const logo=
+document.getElementById(
+'logo'
+);
+
+const tagline=
+document.getElementById(
+'tagline'
+);
+
+const themes=[
+
+'',
+
+'green',
+
+'amber'
+
+];
+
+let theme=0;
+
+function sleep(ms){
+
+return new Promise(
+
+r=>
+
+setTimeout(
+r,
+ms
+
+)
+
+);
+
+}
+
+async function type(
+
+el,
+
+text,
+
+speed,
+
+link=false
+
+){
+
+let s='';
+
+for(
+
+let i=0;
+
+i<text.length;
+
+i++
+
+){
+
+el.innerHTML=
+
+s+
+
+'<span class="cursor">█</span>';
+
+await sleep(
+speed*.45
+);
+
+s+=text[i];
+
+el.textContent=s;
+
+await sleep(
+speed*.55
+);
+
+}
+
+if(link){
+
+el.innerHTML=
+
+'<a href="mailto:info@vesatec.com">' +
+
+s +
+
+'</a>' +
+
+'<span class="cursor">█</span>';
+
+}
+
+}
+
+async function intro(){
+
+logo.innerHTML='';
+
+tagline.innerHTML='';
+
+await sleep(100);
+
+await type(
+
+logo,
+
+'VETERLAND',
+
+70
+
+);
+
+await sleep(
+
+900
+
+);
+
+await type(
+
+tagline,
+
+'Приветствую на сайте Ветра.\n Если вы это видете, значит мой хостинг доступен',
+
+55,
+
+true
+
+);
+
+}
+
+document.body.addEventListener(
+
+'click',
+
+async e=>{
+
+if(
+e.target.closest(
+'a'
+)
+)
+return;
+
+theme++;
+
+theme%=3;
+
+document.documentElement
+.setAttribute(
+
+'data-theme',
+
+themes[
+theme
+]
+
+);
+
+await intro();
+
+}
+
+);
+
+intro();
+
+</script>
+
+
+
+</body></html>
