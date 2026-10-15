@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="violet">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VeterLand</title>
+
+<style>
+/* DOS-шрифт — для логотипа и бренда в панели */
+@import url('https://fonts.cdnfonts.com/css/perfect-dos-vga-437');
+/* AuriolC — для всего остального */
+@import url('https://fonts.cdnfonts.com/css/auriol');
+
+:root {
+  --bg: #0a0414;
+  --fg: #b98cff;
+  --fg-dim: #6b4aa8;
+}
+
+html[data-theme="violet"] { --bg:#0a0414; --fg:#b98cff; --fg-dim:#6b4aa8; }
+html[data-theme="magenta"]{ --bg:#0d0410; --fg:#e07bff; --fg-dim:#8a3fa8; }
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html, body {
+  width:100%; height:100%;
+  overflow:hidden;
+  background: var(--bg);
+  color: var(--fg);
+  /* AuriolC — базовый шрифт страницы */
+  font-family: 'AuriolC', 'Auriol', 'Perfect DOS VGA 437', monospace;
+}
+
+/* === ВЕРХНЯЯ ПАНЕЛЬ === */
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .7rem 1.4rem;
+  font-size: clamp(1rem, 1.8vw, 1.45rem);
+  background: rgba(10, 4, 20, .55);
+  border-bottom: 1px solid var(--fg-dim);
+  backdrop-filter: blur(3px);
+  letter-spacing: .03em;
+}
+
+/* === бренд слева — как центральный логотип === */
+.topbar .brand {
+  font-family: 'Perfect DOS VGA 437', 'Perfect DOS VGA 437 Win', monospace;
+  color: var(--fg);
+  opacity: .85;
+  letter-spacing: 0;
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+  text-shadow: 0 0 8px rgba(185, 140, 255, .3);
+}
+
+.topbar nav {
+  display: flex;
+  gap: 1.6rem;
+}
+
+.topbar a {
+  color: var(--fg);
+  text-decoration: none;
+  padding: .15rem .45rem;
+  transition: background .15s, color .15s;
+}
+
+.topbar a:hover,
+.topbar a:focus-visible {
+  background: var(--fg);
+  color: var(--bg);
+  outline: none;
+}
+
+/* фоновая буква V */
+.watermark {
+  position: fixed;
+  top:50%; left:50%;
+  transform: translate(-50%, -56%);
+  pointer-events: none;
+  opacity: .03;
+  z-index: 1;
+}
+.watermark svg {
+  width: min(120vw, 160vh);
+  height: auto;
+  fill: var(--fg);
+}
+
+/* CRT-эффект */
+.crt::before,
+.crt::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+.crt::before {
+  background: radial-gradient(ellipse at center, transparent 72%, rgba(0,0,0,.25));
+  z-index: 99;
+}
+.crt::after {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0,0,0,.15) 0,
+    rgba(0,0,0,.15) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  z-index: 100;
+}
+
+/* контент */
+.screen {
+  position: relative;
+  z-index: 20;
+  width: 100vw;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 2rem 2rem;
+}
+
+/* === ЛОГОТИП === */
+.logo {
+  font-family: 'Perfect DOS VGA 437', 'Perfect DOS VGA 437 Win', monospace;
+  font-size: clamp(7rem, 24vw, 18rem);
+  line-height: .85;
+  min-height: 1em;
+  text-shadow: 0 0 12px rgba(185, 140, 255, .35);
+}
+
+.tagline {
+  margin-top: .8rem;
+  font-size: clamp(2.2rem, 5.5vw, 4.5rem);
+  white-space: pre-line;
+  letter-spacing: .02em;
+}
+
+.cursor {
+  animation: blink .7s infinite;
+}
+@keyframes blink {
+  0%, 50%  { opacity: 1; }
+  51%, 100%{ opacity: 0; }
+}
+
+@media (max-width: 768px) {
+  .topbar { font-size: .95rem; padding: .55rem .9rem; }
+  .topbar .brand { font-size: 1.05rem; }
+  .topbar nav { gap: 1rem; }
+  .logo    { font-size: clamp(5rem, 22vw, 9rem); }
+  .tagline { font-size: clamp(1.8rem, 7vw, 3rem); }
+  .watermark svg { width: 180vw; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <span class="brand">VETERLAND</span>
+  <nav>
+    <a href="https://veterland.ru">veterland.ru</a>
+    <a href="./link.html">ссылки</a>
+  </nav>
+</header>
+
+<div class="watermark">
+  <svg viewBox="0 0 100 100">
+    <path d="M20 10 L35 10 L35 62 L43 62 L43 75 L57 75 L57 62 L65 62 L65 10 L80 10 L80 62 L70 62 L70 78 L60 78 L60 90 L40 90 L40 78 L30 78 L30 62 L20 62 Z"/>
+  </svg>
+</div>
+
+<div class="crt">
+  <div class="screen">
+    <div id="logo" class="logo"></div>
+    <div id="tagline" class="tagline"></div>
+  </div>
+</div>
+
+<script>
+const logo    = document.getElementById('logo');
+const tagline = document.getElementById('tagline');
+
+const themes = ['violet', 'magenta'];
+let theme = 0;
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+async function type(el, text, speed) {
+  el.innerHTML = '';
+  let s = '';
+  for (const ch of text) {
+    el.innerHTML = s + '<span class="cursor">█</span>';
+    await sleep(speed * .45);
+    s += ch;
+    el.textContent = s;
+    await sleep(speed * .55);
+  }
+  el.innerHTML = s + '<span class="cursor">█</span>';
+}
+
+async function intro() {
+  await sleep(150);
+  await type(logo, 'VETERLAND', 70);
+  await sleep(700);
+  await type(tagline, 'Добро пожаловать.\nСайт снова в сети.', 55);
+}
+
+document.body.addEventListener('click', e => {
+  if (e.target.closest('.topbar')) return;
+  theme = (theme + 1) % themes.length;
+  document.documentElement.setAttribute('data-theme', themes[theme]);
+  intro();
+});
+
+intro();
+</script>
+
+</body>
+</html>

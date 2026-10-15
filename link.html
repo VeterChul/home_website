@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="violet">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VeterLand — ссылки</title>
+
+<style>
+/* DOS — только для бренда и URL-ов */
+@import url('https://fonts.cdnfonts.com/css/perfect-dos-vga-437');
+/* AuriolC — для всего остального */
+@import url('https://fonts.cdnfonts.com/css/auriol');
+
+:root {
+  --bg: #0a0414;
+  --fg: #b98cff;
+  --fg-dim: #6b4aa8;
+}
+html[data-theme="violet"] { --bg:#0a0414; --fg:#b98cff; --fg-dim:#6b4aa8; }
+html[data-theme="magenta"]{ --bg:#0d0410; --fg:#e07bff; --fg-dim:#8a3fa8; }
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html, body {
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--fg);
+  /* базовый шрифт — AuriolC */
+  font-family: 'AuriolC', 'Auriol', monospace;
+}
+
+/* === ВЕРХНЯЯ ПАНЕЛЬ === */
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .7rem 1.4rem;
+  font-size: clamp(1rem, 1.8vw, 1.35rem);
+  background: rgba(10, 4, 20, .75);
+  border-bottom: 1px solid var(--fg-dim);
+  backdrop-filter: blur(3px);
+  /* навигация в панели — AuriolC */
+  font-family: 'AuriolC', 'Auriol', monospace;
+}
+
+/* бренд в панели — как надпись VETERLAND */
+.topbar .brand {
+  font-family: 'Perfect DOS VGA 437', 'Perfect DOS VGA 437 Win', monospace;
+  color: var(--fg);
+  opacity: .85;
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+  text-shadow: 0 0 8px rgba(185, 140, 255, .3);
+}
+
+.topbar nav { display: flex; gap: 1.6rem; }
+.topbar a {
+  color: var(--fg);
+  text-decoration: none;
+  padding: .15rem .45rem;
+  transition: background .15s, color .15s;
+}
+.topbar a:hover,
+.topbar a:focus-visible {
+  background: var(--fg);
+  color: var(--bg);
+  outline: none;
+}
+
+/* CRT-эффект */
+.crt::before,
+.crt::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+.crt::before {
+  background: radial-gradient(ellipse at center, transparent 68%, rgba(0,0,0,.3));
+  z-index: 99;
+}
+.crt::after {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0,0,0,.15) 0,
+    rgba(0,0,0,.15) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  z-index: 100;
+}
+
+/* === контент === */
+.wrap {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 6rem 1.5rem 4rem;
+  position: relative;
+  z-index: 10;
+}
+
+/* заголовок — AuriolC */
+.page-title {
+  font-family: 'AuriolC', 'Auriol', monospace;
+  font-size: clamp(2.2rem, 6vw, 3.8rem);
+  color: var(--fg);
+  text-shadow: 0 0 12px rgba(185, 140, 255, .35);
+  margin-bottom: 2.5rem;
+  letter-spacing: .04em;
+  font-weight: normal;
+}
+
+/* === список поддоменов === */
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.item {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  padding: .6rem 0 .6rem 1.2rem;
+  border-left: 2px solid var(--fg-dim);
+  transition: border-color .15s, padding-left .15s;
+}
+
+.item:hover {
+  border-color: var(--fg);
+  padding-left: 1.6rem;
+}
+
+/* === URL — DOS-шрифт, как VETERLAND === */
+.item .url {
+  font-family: 'Perfect DOS VGA 437', 'Perfect DOS VGA 437 Win', monospace;
+  font-size: clamp(1.15rem, 2.4vw, 1.75rem);
+  line-height: 1.2;
+  color: var(--fg);
+  letter-spacing: .02em;
+  word-break: break-all;
+  transition: text-shadow .15s;
+}
+.item:hover .url {
+  text-shadow: 0 0 12px rgba(185, 140, 255, .7);
+}
+.item .url::before {
+  content: "▸ ";
+  color: var(--fg-dim);
+  transition: color .15s;
+}
+.item:hover .url::before { color: var(--fg); }
+
+/* === описание — AuriolC === */
+.item .desc {
+  margin-top: .35rem;
+  font-family: 'AuriolC', 'Auriol', monospace;
+  color: var(--fg-dim);
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  font-style: italic;
+  opacity: .85;
+}
+
+@media (max-width: 640px) {
+  .topbar { font-size: .9rem; padding: .55rem .8rem; }
+  .topbar .brand { font-size: 1rem; }
+  .topbar nav { gap: .9rem; }
+  .wrap { padding: 5rem 1rem 3rem; }
+}
+</style>
+</head>
+
+<body class="crt">
+
+<header class="topbar">
+  <span class="brand">VETERLAND</span>
+  <nav>
+    <a href="https://veterland.ru">veterland.ru</a>
+    <a href="./index.html">главная</a>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <h1 class="page-title">Ссылки</h1>
+
+  <div class="links">
+
+    <!-- ==== меняй URL и описание прямо тут ==== -->
+
+    <!-- data-check — URL, который проверяем. Обычно совпадает с href. -->
+    <a class="item" href="https://veterland.ru" data-check="https://veterland.ru">
+      <div class="url">veterland.ru</div>
+      <div class="desc">Корень сайта.</div>
+      <div class="status"></div>
+    </a>
+
+    <a class="item" href="https://fileserver.veterland.ru" data-check="https://fileserver.veterland.ru">
+      <div class="url">fileserver.veterland.ru</div>
+      <div class="desc">Инструкци по настройке sftp файл сервера на разных платформах</div>
+      <div class="status"></div>
+    </a>
+
+    <a class="item" href="https://github.com/VeterChul" data-check="https://github.com/VeterChul">
+      <div class="url">https://github/VeterChul</div>
+      <div class="desc">Мой github</div>
+      <div class="status"></div>
+    </a>
+
+    <!-- <a class="item" href="https://hello.veterland.ru">
+      <div class="url">hello.veterland.ru</div>
+      <div class="desc">Не понмю что делает</div>
+    </a>
+
+    <!-- <a class="item" href="https://mail.veterland.ru">
+      <div class="url">mail.veterland.ru</div>
+      <div class="desc">Не помню что делает </div>
+    </a> 
+
+    <a class="item" href="https://pop.veterland.ru">
+      <div class="url">pop.veterland.ru</div>
+      <div class="desc">Не помню что делает </div>
+    </a>
+
+    <a class="item" href="https://smtp.veterland.ru">
+      <div class="url">smtp.veterland.ru</div>
+      <div class="desc">Не помню что делает </div>
+    </a> -->
+
+
+  </div>
+
+</main>
+
+<script>
+/* ====== переключение темы ====== */
+const themes = ['violet', 'magenta'];
+let theme = 0;
+document.body.addEventListener('click', e => {
+  if (e.target.closest('.topbar')) return;
+  if (e.target.closest('a')) return;
+  theme = (theme + 1) % themes.length;
+  document.documentElement.setAttribute('data-theme', themes[theme]);
+});
+
+/* ====== проверка доступности ====== */
+const TIMEOUT_MS = 8000;
+const DELAY_MS   = 400;
+
+async function checkUrl(url) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
+  try {
+    const r = await fetch(
+      `./check.php?url=${encodeURIComponent(url)}`,
+      { signal: controller.signal, cache: 'no-store' }
+    );
+    clearTimeout(timer);
+    const data = await r.json();
+    return data.status; // 0 = недоступен, 200/404/500 и т.д. = код
+  } catch (e) {
+    clearTimeout(timer);
+    return 0;
+  }
+}
+
+async function checkAll() {
+  const items = document.querySelectorAll('.item[data-check]');
+
+  for (const item of items) {
+    const url = item.dataset.check;
+    const statusEl = item.querySelector('.status');
+    if (!statusEl) continue;
+
+    statusEl.textContent = '> проверка...';
+    statusEl.classList.add('show', 'checking');
+
+    const code = await checkUrl(url);
+
+    statusEl.classList.remove('checking');
+
+    if (code === 0) {
+      statusEl.textContent = '⚠ сайт временно недоступен';
+      statusEl.classList.add('show');
+    } else if (code >= 500) {
+      statusEl.textContent = `⚠ сервер вернул ошибку ${code}`;
+      statusEl.classList.add('show');
+    } else {
+      // 2xx / 3xx / 4xx — считаем живым
+      statusEl.textContent = '';
+      statusEl.classList.remove('show');
+    }
+
+    await new Promise(r => setTimeout(r, DELAY_MS));
+  }
+}
+
+window.addEventListener('load', checkAll);
+</script>
+
+</body>
+</html>
